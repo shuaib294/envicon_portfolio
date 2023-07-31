@@ -2,6 +2,8 @@ const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
 
 
 const app = express();
@@ -38,17 +40,17 @@ app.post("/contact", function(req, res){
         secure: true,
         auth: {
             type: 'OAuth2',
-            user: 'enviconsmpt@gmail.com',
-            clientId: '64728600704-qih716r56lmkvamflssd8qjifllh2b8d.apps.googleusercontent.com',
-            clientSecret: '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',
-            refreshToken: '1//04PnBBCyIZKsECgYIARAAGAQSNwF-L9IruKZuC-oGaD1_N_q7QkA-ge78dxjKCC5y5ApNPAeoPmUk9nz9anJv7fv1wCx7r0CUc5w',
-            accessToken: 'ya29.a0AbVbY6MFuC9A9NVvkiNtYShI4KIdCFFdB9T4G_p8sshZMxbWlZBtMSYlHlU-wWSmmEKNtWQe0-wL4qFvBW7rU_SCScoF-aUSVvtxBm1bq9szc8hnydgYHAopXC789nu6z5zIGwATcmFT3wj0TwAzxIseYNupaCgYKAXgSARMSFQFWKvPlCX8Nc3TX3uOwXiGdO71eSQ0163'
+            user: process.env.user,
+            clientId:process.env.clientId,
+            clientSecret: process.env.clientSecret,
+            refreshToken: process.env.refreshToken,
+            accessToken: process.env.accessToken
         }
     });
 
     var mailOptions = {
-        from : "enviconsmpt@gmail.com",
-        to:"envicondxb@gmail.com",
+        from :process.env.from,
+        to:process.env.to,
         subject:"contact form enquiry",
         text: "Name : " + name + "\nEmail : " + email + "\nPhone Number : " + number + "\nMessage : " + message 
     }
